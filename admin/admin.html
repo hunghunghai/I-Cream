@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="shortcut icon" href="../img/logo2222.png" type="image/x-icon">
+    <link rel="stylesheet" href="../main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="./Modal/modal.css">
+    <link rel="stylesheet" href="./admin.css">
+</head>
+
+<body>
+    <div class="Container admin">
+        <div class="header-admin">
+            <div onclick="showProductManagement()">Product Management</div>
+            <div>User management</div>
+            <div>Order management</div>
+            <button onclick="logoutAdmin()">Đăng xuất</button>
+        </div>
+        <div class="list-product-admin">   
+            <img width="30px" id="previewImage" style="display: none;">
+                <div class="form">
+                    <div id="error" style="color: red; display: none;">Vui Lòng điền đầy đủ thông tin!</div>
+                    <label for="myFileInput">Chọn tệp</label>
+                    <input type="file" id="myFileInput" style="display: none;">
+                    <input type="text" id="productName" placeholder="Product Name">
+                    <input type="number" id="productPrice" placeholder="Product price">
+                    <button class="btn-sumbit" onclick="submitForm()">Gửi</button>
+                </div>
+           
+            <div class="table-product">
+                <h1>Product</h1>
+                <table border="1" class="table" id="productTable">
+                    <thead>
+                        <tr>
+                            <th id="th">#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Setting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <th>1</th>
+                            <td><img width="30px" src="../img/product-3.jpg" alt=""></td>
+                            <td>sản phẩm mới</td>
+                            <td>99$</td>
+                            <td>
+                                <button>edit</button>
+                                <button>delete</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="./admin.js"></script>
+    <script src="../js/"></script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+.btn-pink {
+  width: 165px;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  height: 50px;
+  background-color: #f195b2;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.btn-pink:hover {
+  background-color: #ed7399;
+  box-shadow: 0 0 10px 2px #fff;
+}
+
+.btn-pink-2 {
+  border: 1px solid transparent;
+  border-radius: 50px;
+  height: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.btn-blue {
+  width: 165px;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  height: 50px;
+  background-color: #62c3e7;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.btn-blue:hover {
+  background-color: #41b6e2;
+  box-shadow: 0 0 10px 2px #fff;
+}
+
+.btn-slides {
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-link {
+  border: 1px solid #62c3e7;
+  background-color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.btn-link svg {
+  color: #62c3e7;
+}
+
+.btn-link:hover,
+.btn-link:hover svg {
+  background-color: #41b6e2;
+  color: #fff;
+}
+
+.btn-page {
+  width: 40px;
+  padding: 5px;
+  background-color: #f195b2;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.btn-page:hover {
+  background-color: #41b6e2;
+}
+
+.btn-page:focus {
+  background-color: #41b6e2;
+  border: #f195b2 3px solid;
+}
