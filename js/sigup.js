@@ -12,7 +12,7 @@ registerBtn.addEventListener('click', function (event) {
     let duplicateEmail = false;
 
     // Check if all fields are valid
-    if (validateUserName(username) && email && password && repassword && password === repassword && validateEmail(email)) {
+    if (validateUserName(username) && email && validatePassword(password) && repassword && password === repassword && validateEmail(email)) {
         // Check for duplicate email
         for (let i = 0; i < users_list.length; i++) {
             if (users_list[i].email === email) {
@@ -54,7 +54,21 @@ function validateEmail(email) {
     return re.test(email);
 }
 function validateUserName(username) {
-    const nameRegex = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{10,}$/;
+    const nameRegex = /^[A-Z][a-zA-Z]{7,}$/;
     return nameRegex.test(username);
+}
+
+function validatePassword(password) {
+    // Kiểm tra độ dài mật khẩu, nếu nhỏ hơn 8 ký tự thì trả về false
+    if (password.length < 8) {
+        return false;
+    }
+
+    // Kiểm tra mật khẩu có chứa khoảng trắng không, nếu có thì trả về false
+    if (/\s/g.test(password)) {
+        return false;
+    }
+
+    return true;
 }
 

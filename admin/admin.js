@@ -340,7 +340,7 @@ function showOrderDetails() {
   const orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
 
   if (!orderData) {
-    return "<p>chưa chưa có user nào đặt hàng!</p>";
+    return "<p>chưa có user nào đặt hàng!</p>";
   }
 
   let orderDetails = "";

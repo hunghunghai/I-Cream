@@ -1,0 +1,17 @@
+/* Thiết lập màu nền khác cho màn hình lớn */
+@media only screen and (max-width: 1200px) {
+    .product-info {
+        width: 21%;
+    }
+    .nav-links {
+        width: 100%;
+    }
+    .title-text-2 {
+        width: 85% !important;
+    }
+    .title-text-2 b {
+        text-align: center;
+        width: 185%;
+        font-size: 2.5rem;
+    }    
+}

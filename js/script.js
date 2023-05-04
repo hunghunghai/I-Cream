@@ -240,7 +240,7 @@ function saveOrderData() {
         return;
     }
 
-    const orderData = {
+    const orderData = [{
         userId: loggedInUser.id,
         status: 'pending', // Fix the typo here
         products: cart.map((product) => ({
@@ -249,11 +249,13 @@ function saveOrderData() {
             price: product.price,
             quantity: product.quantity,
         })),
-    };
+    }];
 
-    localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify(orderData));
+    localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify([...cart, orderData]));
     localStorage.removeItem(`cart_${loggedInUser.id}`);
+    renderCart();
     alert("Đặt hàng thành công! Kiểm tra đơn hàng của bạn ở góc trái bên dưới màn hình.");
+    // renderCart();
 }
 
 
@@ -261,3 +263,48 @@ let btnOrderCheck = document.getElementById("btn-oder-check");
 btnOrderCheck.addEventListener('click', function () {
     window.location.href = '../detail.html'
 })
+
+
+const searchBtn = document.querySelector('.search-cart button');
+const searchInput = document.querySelector('#search-input');
+
+searchBtn.addEventListener('click', search);
+searchInput.addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        search();
+    }
+});
+
+
+function search() {
+    const searchTerm = searchInput.value;
+    const searchResults = [];
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        if ((product.name && product.name.includes(searchTerm)) || (product.description && product.description.includes(searchTerm))) {
+            searchResults.push(product);
+        }
+
+    }
+    // tạo các phần tử HTML để hiển thị các sản phẩm trong mảng searchResults
+    const searchResultsContainer = document.getElementById('list-product');
+    searchResultsContainer.innerHTML = '';
+    for (let i = 0; i < searchResults.length; i++) {
+        const product = searchResults[i];
+        const productElement = `<div class="product-info">
+        <div class="background">
+          <b>${product.price}$</b>
+        </div>
+        <div class="product-img">
+          <img src=${product.image} alt="">
+        </div>
+        <div class="product-title">
+          <b>${product.name}</b>
+          <button id="${product.id}" class="btn-blue btn-order">Add to Cart</button>
+        </div>
+        </div>
+      `;
+        searchResultsContainer.innerHTML += productElement;
+    }
+}
+
