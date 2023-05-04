@@ -19,22 +19,25 @@
 <body>
     <div class="Container admin">
         <div class="header-admin">
-            <div onclick="showProductManagement()">Product Management</div>
-            <div>User management</div>
-            <div>Order management</div>
+            <button onclick="showProductManagement()">Product Management</button>
+            <button onclick="showUsersManagement()">User management</button>
+            <button onclick="showOrderManagement()">Order management</button>
             <button onclick="logoutAdmin()">Đăng xuất</button>
         </div>
-        <div class="list-product-admin">   
-            <img width="30px" id="previewImage" style="display: none;">
-                <div class="form">
-                    <div id="error" style="color: red; display: none;">Vui Lòng điền đầy đủ thông tin!</div>
-                    <label for="myFileInput">Chọn tệp</label>
-                    <input type="file" id="myFileInput" style="display: none;">
-                    <input type="text" id="productName" placeholder="Product Name">
-                    <input type="number" id="productPrice" placeholder="Product price">
-                    <button class="btn-sumbit" onclick="submitForm()">Gửi</button>
-                </div>
-           
+
+        <!-- quản lý sản phẩm-->
+
+        <div id="product-admin" class="list-product-admin" >
+            <IMG width="30px" id="previewImage" style="display: none;">
+            <div class="form">
+                <div id="error" style="color: red; display: none;">Vui Lòng điền đầy đủ thông tin!</div>
+                <label for="myFileInput">Chọn tệp</label>
+                <input type="file" id="myFileInput" style="display: none;">
+                <input type="text" id="productName" placeholder="Product Name">
+                <input type="number" id="productPrice" placeholder="Product price">
+                <button class="btn-sumbit" onclick="submitForm()">Gửi</button>
+            </div>
+
             <div class="table-product">
                 <h1>Product</h1>
                 <table border="1" class="table" id="productTable">
@@ -48,20 +51,83 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr>
+                        <tr>
                             <th>1</th>
-                            <td><img width="30px" src="../img/product-3.jpg" alt=""></td>
+                            <td><IMG width="30px" src="../IMG/product-3.jpg" alt=""></td>
                             <td>sản phẩm mới</td>
                             <td>99$</td>
                             <td>
                                 <button>edit</button>
                                 <button>delete</button>
                             </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- quản lý user-->
+
+        <div id="user-admin" class="box-user-management" style="display: none;">
+            <div class="management-user">
+                <table class="table-user">
+                    <thead class="title-table-user">
+                        <tr class="table-title-user">
+                            <th class="table-user-title STT">#</th>
+                            <th class="table-user-title">Email</th>
+                            <th class="table-user-title userName">UserName</th>
+                            <th class="table-user-title PassWord">PassWord</th>
+                            <th class="table-user-title Online">status</th>
+                            <th class="table-user-title setting">Setting </th>
+                        </tr>
+                    </thead>
+                    <tbody id="content-table-user">
+                        <!-- <tr class="table-content-user">
+                            <td class="table-user-content STT">#</th>
+                            <td class="table-user-content">Email</td>   
+                            <td class="table-user-content userName">UserName</td>
+                            <td class="table-user-content PassWord">PassWord</td>
+                            <td class="table-user-content Online check">True</td>
+                            <td class="table-user-content setting">
+                                <button class="block btn-setting">Block</button>
+                                <button class="delete btn-setting">Delete</button>
+                                <button class="unlock btn-setting">Unlock</button>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- <button onclick="renderUserList()">â</button> -->
+        </div>
+
+        <!--quản ý dơn hàng-->
+
+        <div id="order-admin" class="list-order" style="display: none;">
+            <div class="box-order-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="product-name">Tên sản phẩm</th>
+                            <th class="product-image">Hình ảnh</th>
+                            <th class="product-price">Giá</th>
+                            <th class="product-quantity">Số lượng</th>
+                            <th class="product-total">Tổng tiền món</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-details">
+                        <!-- Thông tin sản phẩm sẽ được thêm vào đây -->
+                        <!-- <tr>
+                            <td>
+                                <button>Pending</button>
+                                <button>prepare</button>
+                                <button>delivering</button>
+                            </td>
                         </tr> -->
                     </tbody>
                 </table>
             </div>
         </div>
+
     </div>
     <script src="./admin.js"></script>
     <script src="../js/"></script>

@@ -220,6 +220,7 @@
         <!-- login/sigup end-->
         <!-- shpoing cart start-->
         <div>
+            <button id="btn-oder-check" class="btn-pink btn-order-check">Kiểm tra đơn hàng</button>
             <button id="open-modal-btn" class="btn-pink
                                         btn-cart"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                     fill="currentColor" class="bi
@@ -248,7 +249,7 @@
                     <div class="custom-modal-body">
                         <div class="custom-modal-body">
                             <div id="cart">
-                                <div class="cart-product-shopping">
+                                <!-- <div class="cart-product-shopping">
                                     <div class="cart-img"><img width="50" src="./img/product-2.jpg" alt=""></div>
                                     <div class="cart-name">Sản
                                         phẩm mới</div>
@@ -258,11 +259,11 @@
                                         <p>5</p>
                                         <button>+</button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="total-cart">
-                                <div>Total: <span>1000$</span></div>
-                                <button class="btn-oder">oder</button>
+                                <div>Total: <span>0.00$</span></div>
+                                <button onclick="saveOrderData()" class="btn-oder">oder</button>
                             </div>
                         </div>
                     </div>

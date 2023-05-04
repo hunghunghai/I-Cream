@@ -14,7 +14,9 @@
   
   /* Modal content */
   .custom-modal-content {
-    background-color: #fff;
+    background-image: url("../img/wallpaperflare.com_wallpaper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: 10px;
     margin: 8% auto;
     padding: 20px;
@@ -55,13 +57,16 @@
   
   /* Modal body */
   .custom-modal-body {
+    background-color: #ffffff69;
+    width: 100%;
     padding: 10px 0;
-    color: #fff;
+    /* color: #fff; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
+    border-radius: 20px;
   }
   
   /* Modal footer */
@@ -143,27 +148,27 @@
 
   #cart {
     width: 100%;
-    background-color: #ed7399;
-    color: #fff;
+    background-color: transparent;
+    color: #ed7399;
 }
 .cart-product-shopping {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ed7399;
     padding: 5px;
 }
 .cart-name {
     padding: 0 30px;
-    border-left: 3px solid #fff;
-    border-right: 3px solid #fff;
+    border-left: 3px solid #ed7399;
+    border-right: 3px solid #ed7399;
 }
 .cart-img img{
     border-radius: 50%;
 }
 .cart-price {
-    border-right: #fff 3px solid;
+    border-right: #ed7399 3px solid;
     padding: 0 30px 0 0;
 }
 .quantity {
@@ -180,9 +185,9 @@
     background-color: transparent;
     border: none;
     font-size: 20px;
-    color: #fff;
-    border-left: 1px solid #fff;
-    border-right: 1px solid #fff;
+    color: #ed7399;
+    border-left: 1px solid #ed7399;
+    border-right: 1px solid #ed7399;
     border-radius: 50%;
     padding: 0 10px;
 }
@@ -190,7 +195,8 @@
     background-color: #21a9db;
 }
 .total-cart {
-  background-color: #ed7399;
+  color: #ed7399;
+  background-color: transparent;
   width: 100%;
   display: flex;
   justify-content: end;

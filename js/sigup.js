@@ -30,11 +30,13 @@ registerBtn.addEventListener('click', function (event) {
                 username: username,
                 email: email,
                 password: password,
-                repassword: repassword
+                repassword: repassword,
+                status: true
             }
             users_list.push(user_info)
             localStorage.setItem("user", JSON.stringify(users_list))
             alert('Đăng ký thành công');
+            renderUserList()
         }
     } else {
         if (!validateEmail(email)) {

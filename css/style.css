@@ -577,3 +577,10 @@
   color: #fff;
   border-radius: 10px;
 }
+
+.btn-order-check {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 100 ;
+}

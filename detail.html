@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-CREAM</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="shortcut icon" href="./img/logo2222.png" type="image/x-icon">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"> -->
+    <link rel="stylesheet" href="./Modal/modal.css">
+    <style>
+        .list-order {
+            height: 100vh;
+            background-image: url('https://images.creativemarket.com/0.1.0/ps/5712110/1820/1214/m1/fpnw/wm1/qqqxep3a1kut92sn03vxmppbcdoab1fn2wooaq4jkeo5lplk1hsrwfhmmxjigj0d-.jpg?1547653193&s=17bc934034eb2087827ffdeaa03a80b3');
+            /* background-image: url('https://images.creativemarket.com/0.1.0/ps/5712110/1820/1214/m1/fpnw/wm1/qqqxep3a1kut92sn03vxmppbcdoab1fn2wooaq4jkeo5lplk1hsrwfhmmxjigj0d-.jpg?1547653193&s=17bc934034eb2087827ffdeaa03a80b3'); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+        }
+
+        .box-order-list {
+            width: 60%;
+            margin-left: 35%;
+        }
+
+        .box-order-list table {
+            width: 100%;
+            border: 1px solid
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Thêm viền cho bảng */
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list-order">
+        <div class="box-order-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền món</th>
+                    </tr>
+                </thead>
+                <tbody id="order-details">
+                    <!-- Thông tin sản phẩm sẽ được thêm vào đây -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showOrderDetails() {
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+            if (!loggedInUser) {
+                return "<p>Bạn cần đăng nhập để xem đơn hàng!</p>";
+            }
+
+            const orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+
+            if (!orderData) {
+                return "<p>Bạn chưa đặt hàng!</p>";
+            }
+
+            let orderDetails = "";
+            let total = 0;
+
+            orderData.products.forEach((product) => {
+                orderDetails += `<tr>
+        <td>${product.name}</td>
+        <td><img src="${product.image}" width="50" height="50"></td>
+        <td>${product.price.toLocaleString()} $</td>
+        <td>${product.quantity}</td>
+        <td>${(product.price * product.quantity).toLocaleString()}.00 $</td>
+        </tr>`
+                total += product.price * product.quantity;
+            });
+
+            if (orderData.status === "delivering") {
+                orderDetails += `<tr>
+            <th colspan='4'>Trạng thái đơn hàng</th>
+            <td>
+                <label>
+                    <input type="checkbox" id="received-checkbox">
+                    Đã nhận hàng
+                </label>
+                <button onclick="saveReceivedStatus()">Lưu</button>
+            </td>
+        </tr>`
+            } else {
+                orderDetails += `<tr>
+            <th colspan='4'>Trạng thái đơn hàng</th>
+            <td>${orderData.status}</td>
+        </tr>`
+            }
+
+            orderDetails += `<tr>
+        <th colspan='4'>Tổng tiền</th>
+        <td>${total.toLocaleString()} $</td>
+        </tr>`
+
+            return `<tbody>${orderDetails}</tbody>`;
+        }
+
+        // Gọi hàm showOrderDetails() để hiển thị chi tiết đơn hàng
+        const orderDetailsHtml = showOrderDetails();
+        document.getElementById("order-details").innerHTML = orderDetailsHtml;
+
+        function saveReceivedStatus() {
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+            if (!loggedInUser) {
+                alert("Bạn cần đăng nhập để lưu trạng thái đơn hàng!");
+                return;
+            }
+
+            const receivedCheckbox = document.getElementById("received-checkbox");
+
+            if (!receivedCheckbox.checked) {
+                alert("Bạn chưa chọn trạng thái đã nhận hàng!");
+                return;
+            }
+
+            let orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+
+            if (!orderData || orderData.status !== "delivering") {
+                alert("Đơn hàng của bạn không ở trạng thái đang vận chuyển!");
+                return;
+            }
+
+            orderData.status = "received";
+            localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify(orderData));
+
+            // Hiển thị thông báo và cập nhật lại chi tiết đơn hàng
+            alert("Cập nhật trạng thái đơn hàng thành công!");
+            const orderDetailsHtml = showOrderDetails();
+            document.getElementById("order-details").innerHTML = orderDetailsHtml;
+        }
+
+    </script>
+</body>
+
+</html>

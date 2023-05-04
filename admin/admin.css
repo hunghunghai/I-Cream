@@ -160,7 +160,7 @@ input[type="number"] {
   padding: 20px;
 }
 
-.header-admin div {
+.header-admin button {
   padding: 10px;
   width: 100%;
   text-align: center;
@@ -186,4 +186,173 @@ input[type="number"] {
   outline: none;
   padding: 5px 20px 0 20px;
   width: 100%;
+}
+
+.box-user-management {
+  width: 100%;
+  padding: 30px;
+}
+
+.table-user {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.title-table-user {
+  background-color: #62c3e7;
+}
+
+.table-title-user th,
+.table-content-user td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.setting,
+.userName,
+.PassWord {
+  text-align: center;
+  width: 250px;
+}
+
+.STT {
+  width: 50px;
+  text-align: center;
+}
+
+.Online {
+  width: 50px;
+}
+
+.btn-setting {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.block {
+  background-color: rgb(243, 91, 91);
+}
+
+.delete {
+  background-color: #62c3e7;
+}
+
+.unlock {
+  background-color: rgb(86, 241, 86);
+}
+
+.check {
+  background-color: forestgreen;
+  color: rgb(50, 251, 50);
+}
+
+.check-w {
+  background-color: firebrick;
+  color: rgb(255, 25, 25);
+}
+
+/**
+ order
+*/
+.list-order {
+  width: 100%;
+  padding: 20px;
+}
+
+.box-order-list {
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th.product-name,
+td.product-name {
+  text-align: center;
+  padding: 10px;
+}
+
+th.product-image,
+td.product-image {
+  text-align: center;
+  padding: 10px;
+}
+
+th.product-price,
+td.product-price {
+  text-align: center;
+  padding: 10px;
+}
+
+th.product-quantity,
+td.product-quantity {
+  text-align: center;
+  padding: 10px;
+}
+
+th.product-total,
+td.product-total {
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+th {
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: transparent;
+  border-bottom: 1px solid #fff;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+.td-btn {
+  text-align: center;
+  padding: 10px;
+}
+
+.btn-status {
+  background-color: #e6e6e6;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.btn-status.pending {
+  background-color: #ffcc66;
+}
+
+.btn-status.prepare {
+  background-color: #ff9933;
+}
+
+.btn-status.delivering {
+  background-color: #cc6600;
+}
+
+.btn-status:hover {
+  background-color: #b3b3b3;
 }

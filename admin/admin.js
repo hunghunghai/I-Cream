@@ -32,7 +32,7 @@ if (location.pathname.endsWith('/admin/admin.html')) {
 }
 window.addEventListener('beforeunload', function (e) {
   if (isLoggedIn) {
-    const confirmationMessage = 'Bạn có chắc chắn muốn đăng xuất khỏi trang web?';
+    let confirmationMessage = 'Bạn có chắc chắn muốn đăng xuất khỏi trang web?';
     e.returnValue = confirmationMessage;
     return confirmationMessage;
   }
@@ -42,10 +42,6 @@ function logoutAdmin() {
   isLoggedIn = false; // Cập nhật biến kiểm tra của script thành false
   window.location.href = "/admin-login-form/learn.html"; // Chuyển hướng về trang đăng nhập của admin
 }
-
-
-
-
 
 renderProducts();
 
@@ -84,7 +80,7 @@ function submitForm() {
   reader.readAsDataURL(fileInput.files[0]);
 }
 function renderProducts() {
-  const products = JSON.parse(localStorage.getItem("products")) || [];
+  let products = JSON.parse(localStorage.getItem("products")) || [];
   let tableContent = "";
 
   products.forEach((product, index) => {
@@ -95,14 +91,14 @@ function renderProducts() {
           <td id=${product.id + "name"} data-name>${product.name}</td>
           <td id=${product.id + "price"} data-price>${product.price}$</td>
           <td>
-            <button data-edit onclick="editProduct(${product.id})">Edit</button>
-            <button data-delete onclick="deleteProduct(${product.id})">Delete</button>
+            <button id=${product.id + "data-edit"} onclick="editProduct(${product.id})">Edit</button>
+            <button id=${product.id + "data-delete"} onclick="deleteProduct(${product.id})">Delete</button>
           </td>
         </tr>
       `;
   });
 
-  const table = `
+  let table = `
       <table border="1" class="table">
         <thead>
           <tr>
@@ -133,16 +129,16 @@ function editProduct(id) {
   document.querySelector(".form").style.display = "none"
   document.querySelector(".table-product").style.width = "100%"
   // Lấy các phần tử HTML liên quan đến sản phẩm cần chỉnh sửa
-  const nameTd = document.getElementById(`${id + "name"}`);
+  let nameTd = document.getElementById(`${id + "name"}`);
   console.log(nameTd)
-  const priceTd = document.getElementById(`${id + "price"}`);
+  let priceTd = document.getElementById(`${id + "price"}`);
   console.log(priceTd)
-  const imageTd = document.getElementById(`${id + "img"}`);
+  let imageTd = document.getElementById(`${id + "img"}`);
   console.log(imageTd)
 
 
   // Tạo các ô input mới để thay thế các ô td hiện tại
-  const nameInput = document.createElement('input');
+  let nameInput = document.createElement('input');
   nameInput.setAttribute('id', `${id + "namenew"}`)
   nameInput.classList.add("inputEdit")
   nameInput.value = nameTd.textContent;
@@ -150,7 +146,7 @@ function editProduct(id) {
   nameTd.appendChild(nameInput);
   console.log(nameInput)
 
-  const priceInput = document.createElement('input');
+  let priceInput = document.createElement('input');
   priceInput.setAttribute('id', `${id + "pricenew"}`)
   priceInput.classList.add("inputEdit")
   priceInput.value = priceTd.textContent.replace('$', '');
@@ -159,7 +155,7 @@ function editProduct(id) {
   console.log(priceInput)
 
 
-  const imageInput = document.createElement('input');
+  let imageInput = document.createElement('input');
   imageInput.setAttribute('id', `${id + "imgnew"}`)
   imageInput.classList.add("inputEdit")
   imageInput.value = imageTd.querySelector('img').src;
@@ -169,11 +165,11 @@ function editProduct(id) {
 
 
   // Thay đổi nội dung của các nút
-  const editBtn = document.querySelector(`tr[data-id="${id}"] button[data-edit]`);
+  let editBtn = document.getElementById(`${id + 'data-edit'}`);
   editBtn.textContent = 'Save';
   editBtn.setAttribute('onclick', `saveProduct(${id})`);
 
-  const deleteBtn = document.querySelector(`tr[data-id="${id}"] button[data-delete]`);
+  let deleteBtn = document.getElementById(`${id + 'data-delete'}`);
   deleteBtn.textContent = 'Cancel';
   deleteBtn.setAttribute('onclick', `cancelEditProduct(${id})`);
 }
@@ -181,19 +177,19 @@ function editProduct(id) {
 function saveProduct(id) {
   document.querySelector(".form").style.display = "block"
   // Lấy các phần tử HTML liên quan đến sản phẩm cần lưu
-  const nameInput = document.getElementById(`${id + "namenew"}`);
-  const priceInput = document.getElementById(`${id + "pricenew"}`);
-  const imageInput = document.getElementById(`${id + "imgnew"}`);
+  let nameInput = document.getElementById(`${id + "namenew"}`);
+  let priceInput = document.getElementById(`${id + "pricenew"}`);
+  let imageInput = document.getElementById(`${id + "imgnew"}`);
 
   // Lấy giá trị từ các ô input
-  const newName = nameInput.value;
-  const newPrice = parseFloat(priceInput.value).toFixed(2);
-  const newImage = imageInput.value;
+  let newName = nameInput.value;
+  let newPrice = parseFloat(priceInput.value).toFixed(2);
+  let newImage = imageInput.value;
 
   // Cập nhật sản phẩm trong cơ sở dữ liệu
   // Ví dụ: sử dụng localStorage để lưu trữ dữ liệu
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  const index = products.findIndex((product) => product.id === id);
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+  let index = products.findIndex((product) => product.id === id);
   if (index !== -1) {
     products[index].name = newName;
     products[index].price = newPrice;
@@ -202,61 +198,247 @@ function saveProduct(id) {
   }
 
   // Cập nhật lại nội dung của các ô td
-  const nameTd = document.querySelector(`tr[data-id="${id}"] td[data-name]`);
+  let nameTd = document.querySelector(`tr[data-id="${id}"] td[data-name]`);
   nameTd.innerHTML = newName;
 
-  const priceTd = document.querySelector(`tr[data-id="${id}"] td[data-price]`);
+  let priceTd = document.querySelector(`tr[data-id="${id}"] td[data-price]`);
   priceTd.innerHTML = `${newPrice}$`;
 
-  const imageTd = document.getElementById(`${id + "img"}`);
+  let imageTd = document.getElementById(`${id + "img"}`);
   console.log(imageTd)
   imageTd.innerHTML = `<img width="30px" src="${newImage}" alt="">`;
 
   // Thay đổi nội dung của các nút
-  const editBtn = document.querySelector(`tr[data-id="${id}"] button[data-edit]`);
+  let editBtn = document.getElementById(`${id + 'data-edit'}`);
   editBtn.textContent = 'Edit';
-  editBtn.setAttribute('onclick', `editProduct(${id})`);
+  editBtn.setAttribute('onclick', `saveProduct(${id})`);
 
-  const deleteBtn = document.querySelector(`tr[data-id="${id}"] button[data-delete]`);
+  let deleteBtn = document.getElementById(`${id + 'data-delete'}`);
   deleteBtn.textContent = 'Delete';
-  deleteBtn.setAttribute('onclick', `deleteProduct(${id})`);
+  deleteBtn.setAttribute('onclick', `cancelEditProduct(${id})`);
 
 
 }
 
 function cancelEditProduct(id) {
   // Lấy các phần tử HTML liên quan đến sản phẩm cần hủy chỉnh sửa
-  const nameInput = document.querySelector(`tr[data-id="${id}"] input[data-name]`);
-  const priceInput = document.querySelector(`tr[data-id="${id}"] input[data-price]`);
-  const imageInput = document.querySelector(`tr[data-id="${id}"] input[data-image]`);
+  let nameInput = document.querySelector(`tr[data-id="${id}"] input[data-name]`);
+  let priceInput = document.querySelector(`tr[data-id="${id}"] input[data-price]`);
+  let imageInput = document.getElementById(`${id + "img"}`);
 
   // Lấy giá trị ban đầu của sản phẩm
-  const products = JSON.parse(localStorage.getItem('products')) || [];
-  const product = products.find((product) => product.id === id);
-  const originalName = product.name;
-  const originalPrice = product.price;
-  const originalImage = product.image;
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+  let product = products.find((product) => product.id === id);
+  let originalName = product.name;
+  let originalPrice = product.price;
+  let originalImage = product.image;
 
   // Khôi phục giá trị ban đầu của các ô td
-  const nameTd = document.querySelector(`tr[data-id="${id}"] td[data-name]`);
+  let nameTd = document.querySelector(`tr[data-id="${id}"] td[data-name]`);
   nameTd.innerHTML = originalName;
 
-  const priceTd = document.querySelector(`tr[data-id="${id}"] td[data-price]`);
+  let priceTd = document.querySelector(`tr[data-id="${id}"] td[data-price]`);
   priceTd.innerHTML = `${originalPrice}$`;
 
-  const imageTd = document.querySelector(`tr[data-id="${id}"] td[data-image]`);
+  let imageTd = document.getElementById(`${id + "img"}`);
   imageTd.innerHTML = `<img width="30px" src="${originalImage}" alt="">`;
 
-  // Xóa các ô input và hiển thị nút Edit và Delete
+  let editBtn = document.getElementById(`${id + 'data-edit'}`);
+  editBtn.textContent = 'Edit';
+  editBtn.setAttribute('onclick', `saveProduct(${id})`);
+
+
+  //hiển thị nút Edit và Delete
+
+  let deleteBtn = document.getElementById(`${id + 'data-delete'}`);
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.setAttribute('onclick', `cancelEditProduct(${id})`);
+
+  // Xóa các ô input
+
   nameInput.remove();
   priceInput.remove();
   imageInput.remove();
 
-  const editBtn = document.querySelector(`tr[data-id="${id}"] button[data-edit]`);
-  editBtn.textContent = 'Edit';
-  editBtn.setAttribute('onclick', `editProduct(${id})`);
-
-  const deleteBtn = document.querySelector(`tr[data-id="${id}"] button[data-delete]`);
-  deleteBtn.textContent = 'Delete';
-  deleteBtn.setAttribute('onclick', `deleteProduct(${id})`);
 }
+
+function renderUserList() {
+  let user = JSON.parse(localStorage.getItem("user")) || []
+  let userTable = document.getElementById('content-table-user');
+  let userHTML = '';
+  for (let i = 0; i < user.length; i++) {
+    let users = user[i];
+    userHTML += `
+      <tr class="table-content-user">
+        <td class="table-user-content STT">${i + 1}</td>
+        <td class="table-user-content">${users.email}</td>
+        <td class="table-user-content userName">${users.username}</td>
+        <td class="table-user-content PassWord">${users.password}</td>
+        <td id=${users.id + "check"} class="table-user-content Online">${users.status}</td>
+        <td class="table-user-content setting">
+          <button class="block btn-setting" id="${users.id + 1}" onclick="blockUser(${users.id})">Block</button>
+          <button class="delete btn-setting" id="${users.id + 2}" onclick="deleteUser(${users.id})">Delete</button>
+          <button class="unlock btn-setting" id="${users.id + 3}" onclick="unlockUser(${users.id})">Unlock</button>
+        </td>
+      </tr>
+    `;
+  }
+  userTable.innerHTML = userHTML;
+}
+
+
+function deleteUser(id) {
+  let users = JSON.parse(localStorage.getItem('user')) || [];
+  users = users.filter(user => user.id !== id);
+  localStorage.setItem('user', JSON.stringify(users));
+  renderUserList();
+}
+
+function check(userId) {
+  let user = JSON.parse(localStorage.getItem("user")) || [];
+  let statusCell = document.getElementById(`${userId}check`);
+  let userIndex = user.findIndex((u) => u.id == userId);
+  if (user[userIndex].status) {
+    statusCell.innerText = "true";
+    statusCell.classList.add("check");
+    statusCell.classList.remove("check-w");
+  } else {
+    statusCell.innerText = "false";
+    statusCell.classList.add("check-w");
+    statusCell.classList.remove("check");
+  }
+}
+
+function blockUser(userId) {
+  let user = JSON.parse(localStorage.getItem("user")) || [];
+  let userIndex = user.findIndex((u) => u.id == userId);
+  if (userIndex === -1) {
+    console.error("User not found!");
+    return;
+  }
+  user[userIndex].status = false;
+  localStorage.setItem("user", JSON.stringify(user));
+  check(userId);
+}
+
+function unlockUser(userId) {
+  let user = JSON.parse(localStorage.getItem("user")) || [];
+  let userIndex = user.findIndex((u) => u.id == userId);
+  if (userIndex === -1) {
+    console.error("User not found!");
+    return;
+  }
+  user[userIndex].status = true;
+  localStorage.setItem("user", JSON.stringify(user));
+  check(userId);
+}
+
+renderUserList()
+
+function showOrderDetails() {
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+
+  if (!orderData) {
+    return "<p>chưa chưa có user nào đặt hàng!</p>";
+  }
+
+  let orderDetails = "";
+  let total = 0; // Thêm biến total để tính tổng tiền món
+
+  orderData.products.forEach((product) => {
+    orderDetails += `<tr>
+      <td>${product.name}</td>
+      <td><img src="${product.image}" width="50" height="50"></td>
+      <td>${product.price.toLocaleString()} $</td>
+      <td>${product.quantity}</td>
+      <td>${(product.price * product.quantity).toLocaleString()}.00 $</td>
+      </tr>`
+    total += product.price * product.quantity; // Cập nhật giá trị total
+  });
+
+  // Thêm hàng tổng tiền
+  orderDetails += `<tr>
+    <th colspan='4'>Tổng tiền</th>
+    <td>${total.toLocaleString()} $</td>
+    </tr>`
+
+  // Thêm trường tình trạng đơn hàng
+  orderDetails += `<tr>
+    <th colspan='4'>Tình trạng đơn hàng</th>
+    <td>${orderData.status}</td>
+    </tr>`
+
+  orderDetails += `
+  <tr class="td-btn">
+    <td colspan='5'>
+      <button class='btn-status pending' onclick='updateOrderStatus("pending")'>Pending</button>
+      <button class='btn-status prepare' onclick='updateOrderStatus("prepare")'>Prepare</button>
+      <button class='btn-status delivering' onclick='markOrderAsDelivering("delivering")'>delivering</button>
+      <button class='btn-status remote'>remote Order</button>
+    </td>
+  </tr>`
+
+  return `<tbody>${orderDetails}</tbody>`;
+}
+
+const orderDetailsHtml = showOrderDetails();
+document.getElementById("order-details").innerHTML = orderDetailsHtml;
+
+function updateOrderStatus(status) {
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+  orderData.status = status;
+  localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify(orderData));
+  alert(`Đã cập nhật trạng thái đơn hàng thành ${status}`);
+}
+
+function updateOrderStatusToPrepare() {
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+  orderData.status = "prepare";
+  localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify(orderData));
+  alert("Đã cập nhật trạng thái đơn hàng thành prepare");
+}
+
+function markOrderAsDelivering() {
+  let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  let orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+  orderData.status = "delivering";
+  localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify(orderData));
+  alert("Đã cập nhật trạng thái đơn hàng thành delivering");
+  // 
+}
+
+
+function showProductManagement() {
+  document.getElementById('product-admin').style.display = "flex"
+  document.getElementById('user-admin').style.display = "none"
+  document.getElementById('order-admin').style.display = "none"
+}
+function showUsersManagement() {
+  document.getElementById('product-admin').style.display = "none"
+  document.getElementById('user-admin').style.display = "block"
+  document.getElementById('order-admin').style.display = "none"
+}
+function showOrderManagement() {
+  document.getElementById('product-admin').style.display = "none"
+  document.getElementById('user-admin').style.display = "none"
+  document.getElementById('order-admin').style.display = "block"
+}
+
+
+function removeOrder() {
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  const confirmRemove = confirm("Bạn có chắc chắn muốn xoá đơn hàng?");
+  if (confirmRemove) {
+    localStorage.removeItem(`order_${loggedInUser.id}`);
+    alert("Xoá đơn hàng thành công!");
+    const orderDetailsHtml = showOrderDetails();
+    document.getElementById("order-details").innerHTML = orderDetailsHtml;
+  }
+}
+
+const removeButton = document.querySelector(".btn-status.remote");
+removeButton.addEventListener("click", removeOrder);
