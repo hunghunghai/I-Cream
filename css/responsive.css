@@ -1,17 +1,110 @@
 /* Thiết lập màu nền khác cho màn hình lớn */
 @media only screen and (max-width: 1200px) {
-    .product-info {
-        width: 21%;
-    }
-    .nav-links {
-        width: 100%;
-    }
-    .title-text-2 {
-        width: 85% !important;
-    }
-    .title-text-2 b {
-        text-align: center;
-        width: 185%;
-        font-size: 2.5rem;
-    }    
+  .product-info {
+    width: 21%;
+  }
+  .nav-links {
+    width: 100%;
+  }
+  .title-text-2 {
+    width: 85% !important;
+  }
+  .title-text-2 b {
+    text-align: center;
+    width: 185%;
+    font-size: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .product-info {
+    width: 28%;
+  }
+  .nav-links {
+    width: 83% !important;
+    justify-content: center;
+    gap: 20px;
+    font-size: 18px;
+  }
+  .foot-link {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 760px) {
+  .nav-links img {
+    width: 150px;
+  }
+  .nav-links {
+    height: 66px;
+    width: 83% !important;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    font-size: 14px;
+    top: 13px;
+  }
+  .login-sigup {
+    gap: 25% !important;
+  }
+  .title-text-2 b {
+    text-align: center;
+    width: 100%;
+    font-size: 1.5rem !important;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .header-menu1 {
+    display: none !important;
+  }
+  .header-link {
+    justify-content: flex-end;
+  }
+  .nav-links {
+    width: 33% !important;
+    position: absolute;
+    left: -35px;
+    top: -40px;
+  }
+
+  .nav-links a {
+    display: none !important;
+  }
+  .login-sigup {
+    height: 45px !important;
+    gap: 10% !important;
+  }
+  .search-cart input {
+    font-size: 12px !important;
+  }
+  .search-cart button {
+    font-size: 12px !important;
+  }
+  .dropdown p {
+    font-size: 15px !important;
+  }
+  p {
+    margin-bottom: 0 !important;
+  }
+  .product-info {
+    width: 45%;
+  }
+  .foot-link {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .header-link {
+    display: none !important;
+  }
+  .login-sigup {
+    gap: 3% !important;
+  }
+  .search-cart input {
+    padding: 0 !important;
+}
+.search-cart button {
+    padding: 3px 6px;
+}
 }
