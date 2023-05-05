@@ -90,22 +90,24 @@
             }
 
             const orderData = JSON.parse(localStorage.getItem(`order_${loggedInUser.id}`));
+            console.log('orderData: ', orderData);
 
-            if (!orderData) {
+            if (!orderData ) {
                 return "<p>Bạn chưa đặt hàng!</p>";
             }
+
 
             let orderDetails = "";
             let total = 0;
 
             orderData.products.forEach((product) => {
                 orderDetails += `<tr>
-        <td>${product.name}</td>
-        <td><img src="${product.image}" width="50" height="50"></td>
-        <td>${product.price.toLocaleString()} $</td>
-        <td>${product.quantity}</td>
-        <td>${(product.price * product.quantity).toLocaleString()}.00 $</td>
-        </tr>`
+            <td>${product.name}</td>
+            <td><img src="${product.image}" width="50" height="50"></td>
+            <td>${product.price.toLocaleString()} $</td>
+            <td>${product.quantity}</td>
+            <td>${(product.price * product.quantity).toLocaleString()}.00 $</td>
+            </tr>`
                 total += product.price * product.quantity;
             });
 
@@ -119,18 +121,18 @@
                 </label>
                 <button onclick="saveReceivedStatus()">Lưu</button>
             </td>
-        </tr>`
+            </tr>`
             } else {
                 orderDetails += `<tr>
             <th colspan='4'>Trạng thái đơn hàng</th>
             <td>${orderData.status}</td>
-        </tr>`
+            </tr>`
             }
 
             orderDetails += `<tr>
-        <th colspan='4'>Tổng tiền</th>
-        <td>${total.toLocaleString()} $</td>
-        </tr>`
+            <th colspan='4'>Tổng tiền</th>
+            <td>${total.toLocaleString()} $</td>
+            </tr>`
 
             return `<tbody>${orderDetails}</tbody>`;
         }

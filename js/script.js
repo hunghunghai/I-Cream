@@ -117,6 +117,7 @@ const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 if (loggedInUser) {
     document.getElementById('user-remove').style.display = "none"
     document.getElementById('icon-user').style.display = 'block'
+    document.getElementById('btn-oder-check').style.display = 'block'
     let user_login = document.getElementById('User-name-login')
     user_login.textContent = loggedInUser.username;
     user_login.style.color = "#fff"
@@ -143,16 +144,30 @@ productList.onclick = function (e) {
                 const cartItem = cart.find(item => item.id === productId);
                 if (cartItem) {
                     cartItem.quantity++;
-                    alert(`Sản phẩm ${product.name} đã được thêm vào giỏ hàng. Kiểm tra giỏ hàng ở góc màn hình.`);
+                    let alertMessage = document.getElementById('ok-order-2')
+                    alertMessage.innerText = `Sản phẩm ${product.name} đã được thêm vào giỏ hàng. Kiểm tra giỏ hàng ở góc màn hình.`
+                    alertMessage.style.display = 'block';
+                    setTimeout(() => {
+                        alertMessage.style.display = 'none';
+                    }, 1500);
                 } else {
-                    alert(`Sản phẩm ${product.name} đã được thêm vào giỏ hàng. Kiểm tra giỏ hàng ở góc màn hình.`);
+                    let alertMessage = document.getElementById('ok-order-2')
+                    alertMessage.innerText = `Sản phẩm ${product.name} đã được thêm vào giỏ hàng. Kiểm tra giỏ hàng ở góc màn hình.`
+                    alertMessage.style.display = 'block';
+                    setTimeout(() => {
+                        alertMessage.style.display = 'none';
+                    }, 1500);
                     cart.push({ ...product, quantity: 1 });
                 }
                 localStorage.setItem(`cart_${userId.id}`, JSON.stringify(cart)); // lưu giỏ hàng của người dùng vào local storage
                 renderCart();
             }
         } else {
-            alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.");
+            let alertMessage = document.getElementById('not-ok-2')
+            alertMessage.style.display = 'block';
+            setTimeout(() => {
+                alertMessage.style.display = 'none';
+            }, 1500);
             // redirect đến trang đăng nhập
         }
     }
@@ -229,32 +244,45 @@ function saveOrderData() {
     const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
     if (!loggedInUser) {
-        alert("Bạn cần đăng nhập để đặt hàng!");
+        let alertMessage = document.getElementById('not-ok')
+        alertMessage.style.display = 'block';
+        setTimeout(() => {
+            alertMessage.style.display = 'none';
+        }, 1500);
         return;
     }
 
     const cart = JSON.parse(localStorage.getItem(`cart_${loggedInUser.id}`)) || [];
 
     if (cart.length === 0) {
-        alert("Giỏ hàng của bạn trống!");
+        let alertMessage = document.getElementById('not-order')
+        alertMessage.style.display = 'block';
+        setTimeout(() => {
+            alertMessage.style.display = 'none';
+        }, 1500);
         return;
     }
 
-    const orderData = [{
-        userId: loggedInUser.id,
-        status: 'pending', // Fix the typo here
+    const orderData = {
+        status: 'pending',
         products: cart.map((product) => ({
             name: product.name,
             image: product.image,
             price: product.price,
             quantity: product.quantity,
         })),
-    }];
+        userId: loggedInUser.id,
+    };
 
-    localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify([...cart, orderData]));
+    localStorage.setItem(`order_${loggedInUser.id}`, JSON.stringify({ ...orderData }));
     localStorage.removeItem(`cart_${loggedInUser.id}`);
     renderCart();
-    alert("Đặt hàng thành công! Kiểm tra đơn hàng của bạn ở góc trái bên dưới màn hình.");
+    let alertMessage = document.getElementById('ok-order');
+    alertMessage.style.display = 'block';
+    setTimeout(() => {
+        alertMessage.style.display = 'none';
+    }, 1500);
+
     // renderCart();
 }
 

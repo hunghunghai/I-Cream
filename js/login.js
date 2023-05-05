@@ -20,7 +20,7 @@ function login(e) {
 
     for (let i = 0; i < usersList.length; i++) {
       const user = usersList[i];
-      if (user.email === email && user.password === password) {
+      if (user.username === username && user.password === password) {
         if (!user.status) { // Kiểm tra xem tài khoản có bị khóa không
           const errorMsg = document.createElement('div');
           errorMsg.textContent = 'Tài khoản của bạn đã bị khóa hoặc không có!';
